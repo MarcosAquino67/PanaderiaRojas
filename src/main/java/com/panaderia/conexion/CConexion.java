@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
 
 public class CConexion {
 
-    // La contraseña se configura fuera del código para no publicarla en Git.
-    private static final String USUARIO = System.getenv().getOrDefault("PANADERIA_DB_USER", "root");
-    private static final String CONTRASENA = System.getenv("PANADERIA_DB_PASSWORD");
-    private static final String BD = System.getenv().getOrDefault("PANADERIA_DB_NAME", "bd_panaderia_rojas");
-    private static final String IP = System.getenv().getOrDefault("PANADERIA_DB_HOST", "localhost");
-    private static final String PUERTO = System.getenv().getOrDefault("PANADERIA_DB_PORT", "3306");
+    // Configuración de parámetros de conexión a MySQL
+    private static final String USUARIO = "root";
+    private static final String CONTRASENA = "2307";
+    private static final String BD = "bd_panaderia_rojas";
+    private static final String IP = "localhost";
+    private static final String PUERTO = "3306";
 
     // Cadena de conexión JDBC
     private static final String URL = "jdbc:mysql://" + IP + ":" + PUERTO + "/" + BD 
@@ -24,13 +24,6 @@ public class CConexion {
 
     public static Connection establecerConexion() {
         Connection conectar = null;
-        if (CONTRASENA == null || CONTRASENA.isBlank()) {
-            JOptionPane.showMessageDialog(null,
-                "Configura la variable de entorno PANADERIA_DB_PASSWORD antes de iniciar el sistema.",
-                "Falta configurar la base de datos",
-                JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
         try {
             // Cargar el driver JDBC de MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
